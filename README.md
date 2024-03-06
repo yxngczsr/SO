@@ -4,9 +4,10 @@ Curso de Engenharia Informática
 
 Projeto de Sistemas Operativos ***“Linux Operating System Utilities”*** 
 
-Afonso Libano Caldeira da Silva - 20210859 Miguel Sousa Bernardo - 20211066 
-
-Pedro Miguel Ramos Mustra Cesar - 20211192 Roberta Santos, 20211091 
+###### Afonso Silva nº 20210859
+###### Pedro Cesár nº 20211192
+###### Miguel Bernardo nº 20211066
+###### Roberta Santos nº  20211091
 
 https://github.com/yxngczsr/SO 
 
