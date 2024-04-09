@@ -150,18 +150,9 @@ Encontrar e listar arquivos que correspondam aos critérios de pesquisa.
 *Casos Especiais ou Tratamento de Erros:* Lidar com casos em que não há permissão para acessar determinados diretórios. 
 
 *Recursos Adicionais:* Opções de linha de comando para especificar critérios de pesquisa mais complexos. 
+ 
 
-4. **Utilitário “tar”:** 
-
-*Objetivo:* Empacotar e desempacotar arquivos. 
-
-*Entrada Esperada:* Lista de arquivos a serem empacotados ou arquivo a ser desempacotado. *Processamento Necessário:* Empacotar ou desempacotar os arquivos conforme especificado. *Saída Gerada:* Arquivo “tar” gerado ou arquivos desempacotados. 
-
-*Casos Especiais ou Tratamento de Erros:* Lidar com casos em que os arquivos não existem ou não podem ser acessados. 
-
-*Recursos Adicionais:* Opções de linha de comando para especificar o nome do arquivo de saída, ajustar níveis de compressão, etc. 
-
-5. **Utilitário “gzip”:** 
+4. **Utilitário “gzip”:** 
 
 *Objetivo:* Comprimir ou descomprimir arquivos. 
 
@@ -173,7 +164,7 @@ Saída Gerada: Arquivo comprimido ou descomprimido.
 
 *Casos Especiais ou Tratamento de Erros:* Lidar com casos de compressão/descompressão falha. *Recursos Adicionais:* Opções de linha de comando para ajustar níveis de compressão, especificar o nome do arquivo de saída, etc. 
 
-6. **Utilitário “cp”:** 
+5. **Utilitário “cp”:** 
 
 *Objetivo:* Copiar arquivos e diretórios. 
 
@@ -185,19 +176,8 @@ Saída Gerada: Arquivo comprimido ou descomprimido.
 
 *Recursos Adicionais:* Opções de linha de comando para especificar comportamento (por exemplo, cópia recursiva). 
 
-7. **Utilitário “mv”:** 
 
-*Objetivo:* Mover (ou renomear) arquivos e diretórios. 
-
-*Entrada Esperada:* Lista de arquivos/diretórios a serem movidos e destino. 
-
-*Processamento Necessário:* Mover ou renomear os arquivos/diretórios conforme especificado. *Saída Gerada:* Mensagem indicando se a operação foi bem-sucedida. 
-
-*Casos Especiais ou Tratamento de Erros: C*asos em que os arquivos não existam ou não podem ser acessados. 
-
-*Recursos Adicionais:* Opções de linha de comando para especificar comportamento. 
-
-8. **Utilitário “du”:** 
+6. **Utilitário “du”:** 
 
 *Objetivo:* Exibir o espaço utilizado por diretórios e arquivos. 
 
@@ -211,7 +191,7 @@ Saída Gerada: Arquivo comprimido ou descomprimido.
 
 *Recursos Adicionais:* Opções de linha de comando para ajustar o nível de detalhe ou a unidade de medida. 
 
-9. **Utilitário “ls”:** 
+7. **Utilitário “ls”:** 
 
 *Objetivo:* Lista o conteúdo de um diretório. 
 
@@ -223,7 +203,7 @@ Saída Gerada: Arquivo comprimido ou descomprimido.
 
 *Recursos Adicionais:* Opções de linha de comando para ajustar o formato da saída ou incluir informações adicionais. 
 
-10. **Utilitário “mkdir”:** 
+8. **Utilitário “mkdir”:** 
 
 *Objetivo:* Cria um diretório. 
 
