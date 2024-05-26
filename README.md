@@ -1,15 +1,13 @@
-![](Aspose.Words.ebb1524b-3a20-4182-b247-dc3dbb1cbaf2.001.png)
+
 
 Curso de Engenharia Informática 
 
 Projeto de Sistemas Operativos ***“Linux Operating System Utilities”*** 
 
-###### Afonso Silva nº 20210859
 ###### Pedro Cesár nº 20211192
 ###### Miguel Bernardo nº 20211066
 ###### Roberta Santos nº  20211091
 
-https://github.com/yxngczsr/SO 
 
 **Introdução:** 
 
