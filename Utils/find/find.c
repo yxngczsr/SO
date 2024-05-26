@@ -5,41 +5,50 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-void find_file(const char *dir_path, const char *file_to_find) {
-    DIR *dir;
-    struct dirent *entry;
-    struct stat statbuf;
-    char path[1024];
+// Protótipos de funções
+void findFiles(const char* basePath, const char* searchStr);
+void locate(const char* dbPath, const char* searchStr);
+void grepFiles(const char* filePath, const char* searchStr);
+void deduplicate(const char* directory);
 
-    if (!(dir = opendir(dir_path))) {
-        fprintf(stderr, "Error opening directory '%s'\n", dir_path);
-        return;
+int main(int argc, char* argv[]) {
+    if (argc < 3) {
+        printf("Usage: %s <command> <path> [search_string]\n", argv[0]);
+        return 1;
     }
 
-    while ((entry = readdir(dir)) != NULL) {
-        if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
-            continue;  // Skip the '.' and '..' directories
-        }
+    const char* command = argv[1];
+    const char* path = argv[2];
+    const char* searchStr = argc >= 4 ? argv[3] : NULL;
 
-        snprintf(path, sizeof(path), "%s/%s", dir_path, entry->d_name);
-        if (stat(path, &statbuf) == 0) {
-            if (S_ISDIR(statbuf.st_mode)) {
-                find_file(path, file_to_find);  // Recursive call for directories
-            } else if (strcmp(entry->d_name, file_to_find) == 0) {
-                printf("Found: %s\n", path);
-            }
-        }
+    if (strcmp(command, "find") == 0) {
+        findFiles(path, searchStr);
+    } else if (strcmp(command, "locate") == 0) {
+        locate(path, searchStr); // Assume path is the database path
+    } else if (strcmp(command, "grep") == 0) {
+        grepFiles(path, searchStr);
+    } else if (strcmp(command, "dedupe") == 0) {
+        deduplicate(path);
+    } else {
+        printf("Invalid command.\n");
+        return 1;
     }
 
-    closedir(dir);
+    return 0;
 }
 
-int main(int argc, char *argv[]) {
-    if (argc != 3) {
-        fprintf(stderr, "Usage: %s <directory> <filename>\n", argv[0]);
-        return EXIT_FAILURE;
-    }
+void findFiles(const char* basePath, const char* searchStr) {
+    // Implementação de uma busca recursiva por arquivos
+}
 
-    find_file(argv[1], argv[2]);
-    return EXIT_SUCCESS;
+void locate(const char* dbPath, const char* searchStr) {
+    // Implementação de busca utilizando um índice pré-construído
+}
+
+void grepFiles(const char* filePath, const char* searchStr) {
+    // Implementação de busca de texto dentro de arquivos
+}
+
+void deduplicate(const char* directory) {
+    // Implementação de identificação de arquivos duplicados
 }

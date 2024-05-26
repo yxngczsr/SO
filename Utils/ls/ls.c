@@ -3,64 +3,63 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <time.h>
 #include <pwd.h>
 #include <grp.h>
+#include <time.h>
 #include <string.h>
 
-// Função para imprimir permissões de arquivo
 void print_permissions(mode_t mode) {
-    printf( (S_ISDIR(mode)) ? "d" : "-");
-    printf( (mode & S_IRUSR) ? "r" : "-");
-    printf( (mode & S_IWUSR) ? "w" : "-");
-    printf( (mode & S_IXUSR) ? "x" : "-");
-    printf( (mode & S_IRGRP) ? "r" : "-");
-    printf( (mode & S_IWGRP) ? "w" : "-");
-    printf( (mode & S_IXGRP) ? "x" : "-");
-    printf( (mode & S_IROTH) ? "r" : "-");
-    printf( (mode & S_IWOTH) ? "w" : "-");
-    printf( (mode & S_IXOTH) ? "x" : "-");
+    printf("%c", (S_ISDIR(mode)) ? 'd' : '-');
+    printf("%c", (mode & S_IRUSR) ? 'r' : '-');
+    printf("%c", (mode & S_IWUSR) ? 'w' : '-');
+    printf("%c", (mode & S_IXUSR) ? 'x' : '-');
+    printf("%c", (mode & S_IRGRP) ? 'r' : '-');
+    printf("%c", (mode & S_IWGRP) ? 'w' : '-');
+    printf("%c", (mode & S_IXGRP) ? 'x' : '-');
+    printf("%c", (mode & S_IROTH) ? 'r' : '-');
+    printf("%c", (mode & S_IWOTH) ? 'w' : '-');
+    printf("%c ", (mode & S_IXOTH) ? 'x' : '-');
 }
 
-// Função para imprimir informações detalhadas do arquivo
-void print_file_info(const char *name, struct stat *st) {
-    print_permissions(st->st_mode);
-    printf(" %ld", st->st_nlink);
-    printf(" %s", getpwuid(st->st_uid)->pw_name);
-    printf(" %s", getgrgid(st->st_gid)->gr_name);
-    printf(" %5ld", st->st_size);
+void print_long_format(const char *file_name, struct stat *info) {
+    print_permissions(info->st_mode);
+    printf("%4u ", info->st_nlink); // Corrigido para usar %u para unsigned int
+    struct passwd *pwd = getpwuid(info->st_uid);
+    struct group *grp = getgrgid(info->st_gid);
+    if (pwd) printf("%-8s ", pwd->pw_name);
+    else printf("%-8s ", "Unknown");
+    if (grp) printf("%-8s ", grp->gr_name);
+    else printf("%-8s ", "Unknown");
+    printf("%8ld ", info->st_size);
 
-    char date[20];
-    strftime(date, sizeof(date), "%b %d %H:%M", localtime(&st->st_mtime));
-    printf(" %s %s\n", date, name);
+    char date_str[20];
+    strftime(date_str, sizeof(date_str), "%b %d %H:%M", localtime(&info->st_mtime));
+    printf("%s %s\n", date_str, file_name);
 }
 
-// Função para listar diretório
-void list_directory(const char *path, int detailed) {
+void list_directory(const char *path, int show_all, int long_format) {
     struct dirent *entry;
     struct stat statbuf;
-    char fullpath[1024];
+    char full_path[1024];
 
     DIR *dir = opendir(path);
-    if (dir == NULL) {
+    if (!dir) {
         perror("Failed to open directory");
         return;
     }
 
     while ((entry = readdir(dir)) != NULL) {
-        if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0)
-            continue;
-
-        snprintf(fullpath, sizeof(fullpath), "%s/%s", path, entry->d_name);
-        if (stat(fullpath, &statbuf) == -1) {
-            perror("Failed to get file status");
-            continue;
+        if (!show_all && entry->d_name[0] == '.') {
+            continue;  // Skip hidden files unless -a is specified
         }
 
-        if (detailed) {
-            print_file_info(entry->d_name, &statbuf);
-        } else {
-            printf("%s\n", entry->d_name);
+        snprintf(full_path, sizeof(full_path), "%s/%s", path, entry->d_name);
+        if (stat(full_path, &statbuf) == 0) {
+            if (long_format) {
+                print_long_format(entry->d_name, &statbuf);
+            } else {
+                printf("%s\n", entry->d_name);
+            }
         }
     }
 
@@ -68,15 +67,19 @@ void list_directory(const char *path, int detailed) {
 }
 
 int main(int argc, char *argv[]) {
-    int detailed = 0;
+    int show_all = 0, long_format = 0;
+    char *path = ".";  // Default to the current directory
 
-    // Verifica flags para detalhes
-    if (argc > 1 && strcmp(argv[1], "-l") == 0) {
-        detailed = 1;
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(argv[i], "-l") == 0) {
+            long_format = 1;
+        } else if (strcmp(argv[i], "-a") == 0) {
+            show_all = 1;
+        } else {
+            path = argv[i];  // Assume any non-flag argument is the path
+        }
     }
 
-    const char *path = (argc > 2) ? argv[2] : ".";
-
-    list_directory(path, detailed);
-    return EXIT_SUCCESS;
+    list_directory(path, show_all, long_format);
+    return 0;
 }
