@@ -23,7 +23,7 @@ void print_permissions(mode_t mode) {
 
 void print_long_format(const char *file_name, struct stat *info) {
     print_permissions(info->st_mode);
-    printf("%4u ", info->st_nlink); // Corrigido para usar %u para unsigned int
+    printf("%4u ", info->st_nlink); 
     struct passwd *pwd = getpwuid(info->st_uid);
     struct group *grp = getgrgid(info->st_gid);
     if (pwd) printf("%-8s ", pwd->pw_name);
@@ -50,7 +50,7 @@ void list_directory(const char *path, int show_all, int long_format) {
 
     while ((entry = readdir(dir)) != NULL) {
         if (!show_all && entry->d_name[0] == '.') {
-            continue;  // Skip hidden files unless -a is specified
+            continue;  
         }
 
         snprintf(full_path, sizeof(full_path), "%s/%s", path, entry->d_name);
@@ -68,7 +68,7 @@ void list_directory(const char *path, int show_all, int long_format) {
 
 int main(int argc, char *argv[]) {
     int show_all = 0, long_format = 0;
-    char *path = ".";  // Default to the current directory
+    char *path = ".";  
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "-l") == 0) {
@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
         } else if (strcmp(argv[i], "-a") == 0) {
             show_all = 1;
         } else {
-            path = argv[i];  // Assume any non-flag argument is the path
+            path = argv[i];  
         }
     }
 
