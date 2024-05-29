@@ -25,12 +25,13 @@ gcc -o gzip gzip.c -lz
 ./gzip -d compressed.gz decompressed.txt
 ./gzip -z compressed.gz
 
-# DU # 
+
+# DU # ( Exibe espaço cada diretório )
 
 gcc -o du du.c
-du -h /path/to/directory
-du -s /path/to/directory
-du -a /path/to/directory | sort -n
+./du -h
+./du -s 
+./du -a /path/to/directory | sort -n
 
 
 # PS # 
