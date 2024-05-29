@@ -107,121 +107,66 @@ Implementação em Linguagem C para aproveitar os recursos de baixo nível e gar
 
 **“mkdir”:** Cria um diretório. 
 
-**Planeamento dos utilitários:** 
 
-1. ***Utilitário” ps”:*** 
+**Comando dos utilitários:**
 
-*Objetivo:*** Exibir informações sobre processos em execução. 
+**1.	Utilitário” ps”:**
 
-*Entrada Esperada:*** Nenhuma entrada direta do usuário. 
-
-*Processamento Necessário:*** Coletar informações sobre os processos em execução no sistema. Formatando e exibindo essas informações de maneira legível. 
-
-*Saída Gerada:*** Lista de processos em execução, com detalhes como o estado, uso de CPU, etc. *Casos Especiais ou Tratamento de Erros:*** Lidar com permissões insuficientes ou situações em que a obtenção de informações de processos falha. 
-
-*Recursos Adicionais:* Opções de linha de comando para filtrar processos. 
-
-2. ***Utilitário “top”:*** 
-
-*Objetivo:* Exibir informações em tempo real sobre a utilização do sistema e dos processos. *Entrada Esperada:* Nenhuma entrada direta do usuário. 
-
-*Processamento Necessário:* Monitorar a atividade do sistema e dos processos e atualizar informações exibidas em tempo real. 
-
-*Saída Gerada: I*nformações como uso de CPU, memória, processos em execução, etc. 
-
-*Casos Especiais ou Tratamento de Erros:* Lidar com situações em que as informações em tempo real não podem ser obtidas. 
-
-*Recursos Adicionais: O*rdenar a exibição por diferentes métricas. 
-
-3. **Utilitário “find”:** 
-
-*Objetivo:* Procurar arquivos em uma hierarquia de diretórios. 
-
-*Entrada Esperada:* Diretório inicial e critérios de pesquisa. 
-
-*Processamento Necessário:* Percorrer recursivamente a hierarquia de diretórios. 
-
-Encontrar e listar arquivos que correspondam aos critérios de pesquisa. 
-
-*Saída Gerada:* Lista de caminhos de arquivos encontrados. 
-
-*Casos Especiais ou Tratamento de Erros:* Lidar com casos em que não há permissão para acessar determinados diretórios. 
-
-*Recursos Adicionais:* Opções de linha de comando para especificar critérios de pesquisa mais complexos. 
- 
-
-4. **Utilitário “gzip”:** 
-
-*Objetivo:* Comprimir ou descomprimir arquivos. 
-
-*Entrada Esperada:* Arquivo a ser comprimido ou descomprimido. 
-
-*Processamento Necessário:* Aplicar algoritmo de compressão ou descompressão. 
-
-Saída Gerada: Arquivo comprimido ou descomprimido. 
-
-*Casos Especiais ou Tratamento de Erros:* Lidar com casos de compressão/descompressão falha. *Recursos Adicionais:* Opções de linha de comando para ajustar níveis de compressão, especificar o nome do arquivo de saída, etc. 
-
-5. **Utilitário “cp”:** 
-
-*Objetivo:* Copiar arquivos e diretórios. 
-
-*Entrada Esperada:* Lista de arquivos/diretórios a serem copiados e destino. 
-
-*Processamento Necessário:* Criar cópias dos arquivos/diretórios conforme especificado. *Saída Gerada:* Mensagem indicando se a operação foi bem-sucedida. 
-
-*Casos Especiais ou Tratamento de Erros:* Lidar com casos em que os arquivos não existem ou não podem ser acessados. 
-
-*Recursos Adicionais:* Opções de linha de comando para especificar comportamento (por exemplo, cópia recursiva). 
+ps: Exibe todos os processos em execução.
+ps aux: Mostra todos os processos do sistema em um formato detalhado.
+ps -u usuário: Mostra os processos do usuário especificado.
 
 
-6. **Utilitário “du”:** 
+**2.	Utilitário “top”:**
 
-*Objetivo:* Exibir o espaço utilizado por diretórios e arquivos. 
+top: Exibe uma lista dinâmica dos processos em execução, atualizando periodicamente.
+powertop: Fornece informações sobre o consumo de energia do sistema e sugestões para otimizá-lo.
+iotop: Exibe informações sobre a utilização de E/S (entrada/saída) de disco por processos em execução.
 
-*Entrada Esperada:* Diretório a ser analisado. 
 
-*Processamento Necessário:* Calcular o espaço utilizado pelos diretórios e arquivos no diretório especificado. 
+**3.	Utilitário “find”:**
 
-*Saída Gerada:* Lista do espaço utilizado por cada diretório e arquivo. 
+locate: Localiza arquivos pelo nome de forma rápida usando um banco de dados indexado. É mais rápido que o find, mas menos preciso.
+grep: Pode ser usado para procurar texto dentro de arquivos, sendo útil para localizar arquivos com base em seu conteúdo.
+fdupes: Encontra e lista arquivos duplicados em uma hierarquia de diretórios.
 
-*Casos Especiais ou Tratamento de Erros:* Lidar com casos em que não há permissão para acessar determinados diretórios. 
 
-*Recursos Adicionais:* Opções de linha de comando para ajustar o nível de detalhe ou a unidade de medida. 
+**4.	Utilitário “gzip”:**
 
-7. **Utilitário “ls”:** 
+gzip arquivo.txt: Comprime o arquivo especificado.
+gzip -d arquivo.gz: Descomprime o arquivo especificado.
+zcat: Exibe o conteúdo de arquivos comprimidos sem a necessidade de descompactar.
 
-*Objetivo:* Lista o conteúdo de um diretório. 
 
-*Entrada Esperada:* Diretório a ser listado. 
+**5.	Utilitário “cp”:**
 
-*Processamento Necessário:* Obter a lista de arquivos e diretórios no diretório especificado. *Saída Gerada:* Lista de nomes de arquivos e diretórios. 
+mv: Move arquivos e diretórios de um local para outro, sendo útil quando a intenção é mover o arquivo em vez de copiá-lo. 
+cp -r diretorio_origem diretorio_destino: Copia recursivamente todo um diretório para outro destino.
+cp -i arquivo.txt destino: Copia o arquivo para o destino, mas pede confirmação caso já exista um arquivo com o mesmo nome.
 
-*Casos Especiais ou Tratamento de Erros:* Lidar com casos em que não há permissão para acessar determinados diretórios. 
 
-*Recursos Adicionais:* Opções de linha de comando para ajustar o formato da saída ou incluir informações adicionais. 
+**6.	Utilitário “du”:**
 
-8. **Utilitário “mkdir”:** 
+du -h: Exibe o espaço usado por cada diretório de forma humanamente legível.
+du -sh /diretorio: Mostra o espaço total usado por um diretório de forma resumida.
+du -ah /diretorio | sort -n: Lista todos os arquivos e diretórios dentro do diretório ordenados pelo tamanho.
 
-*Objetivo:* Cria um diretório. 
+**7.	Utilitário “ls”:**
 
-*Entrada Esperada:* Nome do diretório a ser criado. 
+ls: Lista o conteúdo do diretório atual.
+ls -l: Exibe informações detalhadas, incluindo permissões, dono, grupo e tamanho dos arquivos.
+ls -a: Mostra todos os arquivos, incluindo os ocultos.
 
-*Processamento Necessário:* Usar a função “mkdir” para criar um novo diretório. 
 
-*Saída Gerada:* Mensagem indicando se o diretório foi criado com sucesso ou se já existe. *Casos Especiais ou Tratamento de Erros:* Lidar com casos em que o diretório não pode ser criado devido a permissões insuficientes ou outros problemas. 
+**8.	 Utilitário “mkdir”:**
+mkdir novo_diretorio: Cria um novo diretório no diretório atual.
+mkdir -p /caminho/para/novo/diretorio: Cria a estrutura de diretórios especificada, se não existir.
+rmdir: Remove diretórios vazios. É útil quando se deseja excluir diretórios somente se estiverem vazios.
 
-*Recursos Adicionais:* Opções de linha de comando para especificar caminho ou permissões. 
 
-**Conclusão:** 
+**Conclusão:**
 
-Em resumo, a implementação dos utilitários para o sistema operativo Linux permitiu a aplicação concreta dos conceitos de Sistemas Operativos, resultando em ferramentas modulares que simplificam operações diárias. 
-
-**Planeamento**: 
-
-![](Aspose.Words.ebb1524b-3a20-4182-b247-dc3dbb1cbaf2.002.jpeg)
-
-![](Aspose.Words.ebb1524b-3a20-4182-b247-dc3dbb1cbaf2.003.jpeg)
+Em resumo, a implementação dos utilitários para o sistema operativo Linux permitiu a aplicação concreta dos conceitos de Sistemas Operativos, resultando em ferramentas modulares que simplificam operações diárias.
 
 **Bibliografia:** 
 
