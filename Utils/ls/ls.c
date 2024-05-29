@@ -23,7 +23,7 @@ void print_permissions(mode_t mode) {
 
 void print_long_format(const char *file_name, struct stat *info) {
     print_permissions(info->st_mode);
-    printf("%4u ", info->st_nlink);
+    printf("%4u ", info->st_nlink); 
     struct passwd *pwd = getpwuid(info->st_uid);
     struct group *grp = getgrgid(info->st_gid);
     if (pwd) printf("%-8s ", pwd->pw_name);
@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
         } else if (strcmp(argv[i], "-a") == 0) {
             show_all = 1;
         } else {
-            path = argv[i];  
+            path = argv[i]; 
         }
     }
 

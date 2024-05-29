@@ -1,54 +1,96 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <dirent.h>
 #include <sys/stat.h>
-#include <unistd.h>
+#include <errno.h>
 
-// Protótipos de funções
-void findFiles(const char* basePath, const char* searchStr);
-void locate(const char* dbPath, const char* searchStr);
-void grepFiles(const char* filePath, const char* searchStr);
-void deduplicate(const char* directory);
+void print_usage() {
+    printf("Usage:\n");
+    printf("  ./find -name <pattern> /path/to/search\n");
+    printf("  ./find -locate <pattern>\n");
+    printf("  ./find -grep <pattern> /path/to/search\n");
+    printf("  ./find -fdupes /path/to/search\n");
+}
 
-int main(int argc, char* argv[]) {
+void search_by_name(const char *name, const char *path) {
+    DIR *dir;
+    struct dirent *entry;
+
+    if (!(dir = opendir(path))) {
+        perror("opendir");
+        return;
+    }
+
+    while ((entry = readdir(dir)) != NULL) {
+        if (entry->d_type == DT_DIR) {
+            if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0)
+                continue;
+            char new_path[1024];
+            snprintf(new_path, sizeof(new_path), "%s/%s", path, entry->d_name);
+            search_by_name(name, new_path);
+        } else {
+            if (strstr(entry->d_name, name)) {
+                printf("%s/%s\n", path, entry->d_name);
+            }
+        }
+    }
+    closedir(dir);
+}
+
+void locate_pattern(const char *pattern) {
+    char command[256];
+    snprintf(command, sizeof(command), "locate %s", pattern);
+    system(command);
+}
+
+void grep_pattern(const char *pattern, const char *path) {
+    char command[256];
+    snprintf(command, sizeof(command), "grep -r %s %s", pattern, path);
+    system(command);
+}
+
+void find_duplicates(const char *path) {
+    char command[256];
+    snprintf(command, sizeof(command), "fdupes -r %s", path);
+    system(command);
+}
+
+int main(int argc, char *argv[]) {
     if (argc < 3) {
-        printf("Usage: %s <command> <path> [search_string]\n", argv[0]);
+        print_usage();
         return 1;
     }
 
-    const char* command = argv[1];
-    const char* path = argv[2];
-    const char* searchStr = argc >= 4 ? argv[3] : NULL;
-
-    if (strcmp(command, "find") == 0) {
-        findFiles(path, searchStr);
-    } else if (strcmp(command, "locate") == 0) {
-        locate(path, searchStr); // Assume path is the database path
-    } else if (strcmp(command, "grep") == 0) {
-        grepFiles(path, searchStr);
-    } else if (strcmp(command, "dedupe") == 0) {
-        deduplicate(path);
+    if (strcmp(argv[1], "-name") == 0) {
+        if (argc != 4) {
+            print_usage();
+            return 1;
+        }
+        search_by_name(argv[2], argv[3]);
+    } else if (strcmp(argv[1], "-locate") == 0) {
+        if (argc != 3) {
+            print_usage();
+            return 1;
+        }
+        locate_pattern(argv[2]);
+    } else if (strcmp(argv[1], "-grep") == 0) {
+        if (argc != 4) {
+            print_usage();
+            return 1;
+        }
+        grep_pattern(argv[2], argv[3]);
+    } else if (strcmp(argv[1], "-fdupes") == 0) {
+        if (argc != 3) {
+            print_usage();
+            return 1;
+        }
+        find_duplicates(argv[2]);
     } else {
-        printf("Invalid command.\n");
+        print_usage();
         return 1;
     }
 
     return 0;
-}
-
-void findFiles(const char* basePath, const char* searchStr) {
-    // Implementação de uma busca recursiva por arquivos
-}
-
-void locate(const char* dbPath, const char* searchStr) {
-    // Implementação de busca utilizando um índice pré-construído
-}
-
-void grepFiles(const char* filePath, const char* searchStr) {
-    // Implementação de busca de texto dentro de arquivos
-}
-
-void deduplicate(const char* directory) {
-    // Implementação de identificação de arquivos duplicados
 }

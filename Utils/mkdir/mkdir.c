@@ -5,7 +5,6 @@
 #include <errno.h>
 #include <unistd.h>
 
-// Função para criar diretórios recursivamente (mkdir -p)
 int mkdir_p(const char *path) {
     char temp[1024];
     char *p = NULL;
@@ -40,7 +39,6 @@ int mkdir_p(const char *path) {
     return 0;
 }
 
-// Função para remover diretório (rmdir)
 int remove_dir(const char *path) {
     if (rmdir(path) == 0) {
         printf("Directory %s removed successfully\n", path);

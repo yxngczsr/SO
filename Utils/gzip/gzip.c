@@ -5,7 +5,7 @@
 
 #define CHUNK 16384
 
-// Comprime o arquivo de origem para o arquivo de destino
+
 int compress_file(const char* src, const char* dest) {
     FILE *source = fopen(src, "rb");
     gzFile destFile = gzopen(dest, "wb");
@@ -26,7 +26,6 @@ int compress_file(const char* src, const char* dest) {
     return 0;
 }
 
-// Descomprime o arquivo de origem para o arquivo de destino
 int decompress_file(const char* src, const char* dest) {
     char buffer[CHUNK];
     FILE *destFile = fopen(dest, "wb");
@@ -47,7 +46,6 @@ int decompress_file(const char* src, const char* dest) {
     return 0;
 }
 
-// Lê e exibe o conteúdo do arquivo gz comprimido
 void zcat_file(const char* src) {
     char buffer[CHUNK];
     gzFile source = gzopen(src, "rb");

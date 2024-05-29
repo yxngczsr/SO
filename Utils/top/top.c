@@ -6,7 +6,7 @@
 #include <sys/stat.h>
 #include <time.h>
 #include <pwd.h>
-#include <ctype.h>  // Inclui ctype.h para isdigit
+#include <ctype.h>
 
 #define MAX_PATH 1024
 #define MAX_PROC 1024
@@ -106,7 +106,25 @@ void print_process_info(ProcessInfo *proc) {
            proc->io_read, proc->io_write, proc->command);
 }
 
-int main() {
+void show_powertop() {
+    system("powertop");
+}
+
+void show_iotop() {
+    system("sudo iotop");
+}
+
+int main(int argc, char *argv[]) {
+    if (argc > 1) {
+        if (strcmp(argv[1], "powertop") == 0) {
+            show_powertop();
+            return 0;
+        } else if (strcmp(argv[1], "iotop") == 0) {
+            show_iotop();
+            return 0;
+        }
+    }
+
     DIR *dir = opendir("/proc");
     if (!dir) {
         perror("Failed to open /proc");

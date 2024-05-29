@@ -1,10 +1,10 @@
-# MKDIR #
+# MKDIR # (Criar Diretórios)
 
 gcc -o mkdir mkdir.c
-./mkdir -p /path/to/new/directory
-./mkdir -r /path/to/new/directory
+./mkdir -p /path/to/new/directory (cria)
+./mkdir -r /path/to/new/directory (remove)
 
-# LS # 
+# LS # (Exibe informações detalhadas dos arquivos.)
 
 gcc -o ls ls.c
 ./ls -l
@@ -40,10 +40,6 @@ gcc -o ps_improved ps_improved.c
 ./ps_improved aux
 ./ps_improved -u username
 
-# TOP # 
-
-gcc -o top top.c
-./top
 
 # FIND # 
 
@@ -52,3 +48,11 @@ gcc -o find find.c
 ./find -locate "pattern"
 ./find -grep "pattern" /path/to/search
 ./find -fdupes /path/to/search
+
+
+# TOP # 
+
+gcc -o top top.c
+./top
+./top powertop
+./top iotop
