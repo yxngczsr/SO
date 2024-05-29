@@ -1,3 +1,16 @@
+# MKDIR #
+
+gcc -o mkdir mkdir.c
+./mkdir -p /path/to/new/directory
+./mkdir -r /path/to/new/directory
+
+# LS # 
+
+gcc -o ls ls.c
+./ls -l
+./ls -a
+./ls -l -a /path/to/directory
+
 # PS # 
 
 gcc -o ps_improved ps_improved.c
