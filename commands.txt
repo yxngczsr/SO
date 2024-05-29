@@ -17,10 +17,6 @@ gcc -o cp cp.c
 ./cp -i source_file destination_folder ( copiar file para um diretório )
 ./cp -r source_directory destination_directory
 
-# MV # (Move ou renomeia arquivos ou diretório)
-
-gcc -o mv mv.c
-./mv source_file destination_file
 
 # GZIP # 
 
@@ -55,10 +51,3 @@ gcc -o find_util find_util.c
 ./find_util -locate "pattern"
 ./find_util -grep "pattern" /path/to/search
 ./find_util -fdupes /path/to/search
-
-# TAR #
-
-gcc -o tar_util tar_util.c
-./tar_util -c archive.tar file1 file2
-./tar_util -x archive.tar
-
