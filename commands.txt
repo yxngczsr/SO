@@ -17,6 +17,18 @@ gcc -o cp cp.c
 ./cp -i source_file destination_folder ( copiar file para um diretório )
 ./cp -r source_directory destination_directory
 
+# MV # (Move ou renomeia arquivos ou diretório)
+
+gcc -o mv mv.c
+./mv source_file destination_file
+
+# GZIP # 
+
+gcc -o gzip gzip.c -lz
+./gzip -c original.txt compressed.gz
+./gzip -d compressed.gz decompressed.txt
+./gzip -z compressed.gz
+
 # PS # 
 
 gcc -o ps_improved ps_improved.c
