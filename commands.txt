@@ -28,9 +28,9 @@ gcc -o gzip gzip.c -lz
 # DU # 
 
 gcc -o du du.c
-./du -h /path/to/directory
-./du -s /path/to/directory
-./du -a /path/to/directory | sort -n
+du -h /path/to/directory
+du -s /path/to/directory
+du -a /path/to/directory | sort -n
 
 
 # PS # 
@@ -41,13 +41,13 @@ gcc -o ps_improved ps_improved.c
 
 # TOP # 
 
-gcc -o custom_top custom_top.c
-./custom_top
+gcc -o top top.c
+./top
 
 # FIND # 
 
-gcc -o find_util find_util.c
-./find_util -name "pattern" /path/to/search
-./find_util -locate "pattern"
-./find_util -grep "pattern" /path/to/search
-./find_util -fdupes /path/to/search
+gcc -o find find.c
+./find -name "pattern" /path/to/search
+./find -locate "pattern"
+./find -grep "pattern" /path/to/search
+./find -fdupes /path/to/search
