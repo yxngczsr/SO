@@ -14,7 +14,7 @@ gcc -o ls ls.c
 # CP # 
 
 gcc -o cp cp.c
-./cp source_file destination_file
+./cp -i source_file destination_folder ( copiar file para um diretório )
 ./cp -r source_directory destination_directory
 
 # PS # 
@@ -67,15 +67,3 @@ gcc -o du_improved du_improved.c
 ./du_improved -s /path/to/directory
 ./du_improved -a /path/to/directory | sort -n
 
-# LS # 
-
-gcc -o ls_improved ls_improved.c
-./ls_improved -l
-./ls_improved -a
-./ls_improved -l -a /path/to/directory
-
-# MKDIR #
-
-gcc -o dir_operations dir_operations.c
-./dir_operations -p /path/to/new/directory
-./dir_operations -r /path/to/new/directory
