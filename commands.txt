@@ -29,6 +29,14 @@ gcc -o gzip gzip.c -lz
 ./gzip -d compressed.gz decompressed.txt
 ./gzip -z compressed.gz
 
+# DU # 
+
+gcc -o du du.c
+./du -h /path/to/directory
+./du -s /path/to/directory
+./du -a /path/to/directory | sort -n
+
+
 # PS # 
 
 gcc -o ps_improved ps_improved.c
@@ -53,29 +61,4 @@ gcc -o find_util find_util.c
 gcc -o tar_util tar_util.c
 ./tar_util -c archive.tar file1 file2
 ./tar_util -x archive.tar
-
-# GZIP # 
-
-gcc -o simple_gzip simple_gzip.c -lz
-./simple_gzip -c original.txt compressed.gz
-./simple_gzip -d compressed.gz decompressed.txt
-./simple_gzip -z compressed.gz
-
-# CP # 
-
-gcc -o cp_util cp_util.c
-./cp_util source_file destination_file
-./cp_util -r source_directory destination_directory
-
-# MV #
-
-gcc -o mv_util mv_util.c
-./mv_util source_file destination_file
-
-# DU # 
-
-gcc -o du_improved du_improved.c
-./du_improved -h /path/to/directory
-./du_improved -s /path/to/directory
-./du_improved -a /path/to/directory | sort -n
 
