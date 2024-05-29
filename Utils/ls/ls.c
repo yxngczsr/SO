@@ -23,7 +23,7 @@ void print_permissions(mode_t mode) {
 
 void print_long_format(const char *file_name, struct stat *info) {
     print_permissions(info->st_mode);
-    printf("%4u ", info->st_nlink); 
+    printf("%4u ", info->st_nlink);
     struct passwd *pwd = getpwuid(info->st_uid);
     struct group *grp = getgrgid(info->st_gid);
     if (pwd) printf("%-8s ", pwd->pw_name);
@@ -68,7 +68,7 @@ void list_directory(const char *path, int show_all, int long_format) {
 
 int main(int argc, char *argv[]) {
     int show_all = 0, long_format = 0;
-    char *path = "."; 
+    char *path = ".";  
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "-l") == 0) {
@@ -80,7 +80,6 @@ int main(int argc, char *argv[]) {
         }
     }
 
-   
     struct stat statbuf;
     if (stat(path, &statbuf) != 0) {
         perror("Failed to access path");

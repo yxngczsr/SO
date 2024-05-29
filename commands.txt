@@ -11,6 +11,12 @@ gcc -o ls ls.c
 ./ls -a
 ./ls -l -a /path/to/directory
 
+# CP # 
+
+gcc -o cp cp.c
+./cp source_file destination_file
+./cp -r source_directory destination_directory
+
 # PS # 
 
 gcc -o ps_improved ps_improved.c

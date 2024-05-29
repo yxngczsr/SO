@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/acc/Desktop/SO/SO/Utils/ls",
-      "program": "/Users/acc/Desktop/SO/SO/Utils/ls/build/Debug/outDebug"
+      "cwd": "/Users/acc/Desktop/SO/SO/Utils/cp",
+      "program": "/Users/acc/Desktop/SO/SO/Utils/cp/build/Debug/outDebug"
     }
   ]
 }
